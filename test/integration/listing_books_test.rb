@@ -3,8 +3,9 @@ require 'test_helper'
 class ListingBooksTest < ActionDispatch::IntegrationTest
 
 setup do
-	Book.create!(title: 'Pragmatic Programmer',rating: 5)
-	Book.create!(title: 'Learn ruby',rating: 3)	
+	@genre = Genre.create!(name: 'Fiction')
+	@genre.books.create!(title: 'Pragmatic Programmer',rating: 5)
+	@genre.books.create!(title: 'Learn ruby',rating: 3)	
 end
 
  test 'listing books' do
@@ -21,5 +22,7 @@ end
 
  	assert_equal 1,json(response.body).size
  end
+
+
 
 end
