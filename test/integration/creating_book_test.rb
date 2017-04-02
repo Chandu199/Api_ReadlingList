@@ -3,7 +3,7 @@ require 'test_helper'
 class CreatingBookTest < ActionDispatch::IntegrationTest
 
 	test 'Create books with valid data' do
-		post '/books',{book: {
+		post '/api/books',{book: {
 			title: 'Pragmatic Programmer',
 			rating: 3,
 			author: "Dave thomas",
@@ -16,7 +16,7 @@ class CreatingBookTest < ActionDispatch::IntegrationTest
 		assert_equal 201,response.status
 		assert_equal Mime::JSON,response.content_type
 		book = json(response.body)
-		assert_equal book_url(book[:id]),response.location
+		assert_equal api_book_url(book[:id]),response.location
 		assert_equal 'Pragmatic Programmer', book[:title]
 		assert_equal 3, book[:rating]
 		assert_equal 'Dave thomas', book[:author]
@@ -27,7 +27,7 @@ class CreatingBookTest < ActionDispatch::IntegrationTest
 	end
 
 	test 'Create books with invalid data' do
-		post '/books',{book: {
+		post '/api/books',{book: {
 			title: nil,
 			rating: 3,
 			}}.to_json,

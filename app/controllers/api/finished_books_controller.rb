@@ -1,3 +1,4 @@
+module Api
 class FinishedBooksController < ApplicationController
 	def index
 		books = Book.finished
@@ -6,4 +7,5 @@ class FinishedBooksController < ApplicationController
 			format.xml {render xml:books, status: 200}
 		end
 	end
+end
 end
